@@ -1,0 +1,27 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  user: "{{ pyenv_user }}"
+  pre_tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 600
+      when: ansible_os_family == 'Debian'
+      changed_when: false
+  roles:
+    - role: jeffreyjs.pyenv
+      pyenv_owner: "{{ pyenv_user }}"
+      pyenv_global: "3.11.1"
+      pyenv_update_git_install: false
+      pyenv_enable_autocompletion: false
+      pyenv_python_versions:
+        - "3.9.5"
+        - "3.10.1"
+        - "3.11.1"
+      pyenv_virtualenvs:
+        - venv_name: "latest_v3"
+          py_version: "3.11.1"
+  vars:
+    pyenv_user: root

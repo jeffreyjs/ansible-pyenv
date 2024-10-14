@@ -1,0 +1,31 @@
+---
+- name: Run custom_facts
+  ansible.builtin.include_tasks: custom_facts.yml
+  vars:
+    ansible_become: true
+
+- name: Include MacOSX tasks
+  ansible.builtin.include_tasks: Darwin.yml
+  when: ansible_os_family == "Darwin"
+
+- name: Include Debian tasks
+  ansible.builtin.include_tasks: Debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: Include RedHat tasks
+  ansible.builtin.include_tasks: RedHat.yml
+  when: ansible_os_family == "RedHat"
+
+- name: "Install PyEnv for {{ pyenv_owner }}"
+  when: pyenv_env == "user"
+  become: true
+  become_user: "{{ pyenv_owner }}"
+  block:
+    - name: "Include install.yml as {{ pyenv_owner }}"
+      ansible.builtin.include_tasks: install.yml
+
+- name: Install PyEnv for System
+  ansible.builtin.include_tasks: install.yml
+  when: pyenv_env == "system"
+  vars:
+    ansible_become: true

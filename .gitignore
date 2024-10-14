@@ -1,0 +1,8 @@
+.vagrant
+*.py[co]
+build
+
+.molecule
+*.retry
+
+.DS_Store

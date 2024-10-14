@@ -1,0 +1,7 @@
+skip_list:
+  - 'yaml'
+  - 'risky-shell-pipe'
+  - 'role-name'
+
+warn_list:
+  - 'internal-error'

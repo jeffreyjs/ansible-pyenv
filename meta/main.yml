@@ -1,0 +1,36 @@
+---
+galaxy_info:
+  author: Jeffrey Swindel
+  description: Install and configure pyenv (https://github.com/pyenv/pyenv) on Linux systems.
+  license: license (BSD, MIT)
+  min_ansible_version: '2.9'
+  namespace: jeffreyjs
+  role_name: pyenv
+  platforms:
+    - name: Fedora
+      versions:
+        - '34'
+        - '35'
+    - name: EL
+      versions:
+        - '7'
+        - '8'
+    - name: Debian
+      versions:
+        - stretch
+        - buster
+        - bullseye
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+        - jammy
+        - noble
+    - name: ArchLinux
+      versions:
+        - all
+  galaxy_tags:
+    - system
+    - development
+
+dependencies: []
