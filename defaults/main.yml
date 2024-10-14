@@ -9,7 +9,8 @@ pyenv_enable_autocompletion: no
 pyenv_python_versions:
   - 3.12.0
 pyenv_virtualenvs:
-  - { venv_name: "latest", py_version: "3.12.0" }
+  - venv_name: "latest"
+    py_version: "3.12.0"
 # For a system install, the shims dir will not be writable by users, disable rehashing
 pyenv_init_options: "{% if pyenv_env != 'user' %}--no-rehash{% endif %}"
 
@@ -42,7 +43,9 @@ pyenv_redhat_packages:
   - make
   - git
   - gcc
-  - "{{ ((ansible_facts.distribution_major_version | default(0) | int) < 8) | ternary('libselinux-python', 'python3-libselinux') }}"
+  - >-
+    "{{ ((ansible_facts.distribution_major_version | default(0) | int) < 8) |
+    ternary('libselinux-python', 'python3-libselinux') }}"
   - zlib-devel
   - openssl-devel
   - bzip2-devel
